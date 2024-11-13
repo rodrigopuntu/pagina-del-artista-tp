@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Álbum - Muerte - Canserbero</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding-top: 70px; /* Espacio para el header fijo */
+      background-color: #111;
+      color: #fff;
+    }
+
+    header {
+      width: 100%;
+      padding: 10px;
+      background-color: #222;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .back-button {
+      background-color: transparent;
+      color: #ff0000;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      position: absolute;
+      left: 50px;
+    }
+
+    .back-button:hover {
+      color: #b30000;
+    }
+
+    .logo-container {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+
+    .logo-container img {
+      width: 40px;
+      cursor: pointer;
+    }
+
+    .header-content {
+      text-align: center;
+    }
+
+    main {
+      display: flex;
+      width: 80%;
+      max-width: 1200px;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    #albumDetails {
+      width: 30%;
+      background-color: #222;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #lyrics-section {
+      width: 65%;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      color: #fff;
+    }
+
+    h1, h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .song-button {
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color 0.3s;
+    }
+
+    .song-button:hover {
+      background-color: #b30000;
+      transform: scale(1.02);
+    }
+
+    #lyrics {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #111;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Logo en la esquina superior izquierda -->
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="images/logoclaro.jpg" alt="Logo">
+      </a>
+    </div>
+
+    <!-- Botón de regreso con símbolo "<" -->
+    <button class="back-button" onclick="goBackToIndex()">&lt;</button>
+
+    <!-- Contenido centrado del header -->
+    <div class="header-content">
+      <h1>Álbum - Muerte</h1>
+      <p>Lista de canciones</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="albumDetails">
+      <h2>Tracklist</h2>
+      <ul id="songs-list"></ul>
+    </section>
+
+    <section id="lyrics-section" style="display:none;">
+      <h2>Letra de la Canción</h2>
+      <div id="lyrics"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Canserbero</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    function goBackToIndex() {
+      window.location.href = 'index.html';
+    }
+
+    fetch('discography.json')
+      .then(response => response.json())
+      .then(data => {
+        const album = data.albums.find(album => album.id === 'muerte'); // Buscar el álbum "Muerte"
+        if (album) {
+          displayAlbumSongs(album); // Mostrar las canciones del álbum
+        } else {
+          document.getElementById('songs-list').innerHTML = '<p>Álbum no encontrado.</p>';
+        }
+      })
+      .catch(error => {
+        document.getElementById('songs-list').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+      });
+
+    function displayAlbumSongs(album) {
+      const songList = document.getElementById('songs-list');
+      songList.innerHTML = album.songs.map(song => `
+        <li><button class="song-button" data-song="${song}">${song}</button></li>
+      `).join('');
+
+      const songButtons = document.querySelectorAll('.song-button');
+      songButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const songName = this.dataset.song;
+          fetchLyrics(songName);
+        });
+      });
+    }
+
+    function fetchLyrics(songName) {
+      const artistName = 'Canserbero';
+      document.getElementById('lyrics').innerHTML = 'Cargando letra...';
+      document.getElementById('lyrics-section').style.display = 'block';
+
+      fetch(`https://api.lyrics.ovh/v1/${artistName}/${songName}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.lyrics) {
+            document.getElementById('lyrics').innerHTML = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>');
+          } else {
+            document.getElementById('lyrics').innerHTML = 'No se encontró la letra de la canción.';
+          }
+        })
+        .catch(error => {
+          document.getElementById('lyrics').innerHTML = 'Hubo un error al cargar la letra.';
+          console.error('Error al cargar la letra:', error);
+        });
+    }
+  </script>
+</body>
+</html>
+
+

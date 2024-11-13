@@ -1,0 +1,80 @@
+{
+  "albums": [
+    {
+      "id": "muerte",
+      "title": "Muerte",
+      "image": "images/album.jpg",
+      "songs": [
+        "C'est La Mort",
+        "Es Epico",
+        "Ser Vero",
+        "En El Valle De Las Sombras",
+        "Maquiavelico",
+        "Mundo De Piedra",
+        "Sin Mercy",
+        "Un Dia En El Barrio",
+        "Lloviá",
+        "Y En Un Espejo Vi",
+        "La Hora Del Juicio",
+        "El Primer Trago",
+        "De Mi Muerte",
+        "Jeremias 17-5"
+      ]
+    },
+    {
+      "id": "vida",
+      "title": "Vida",
+      "image": "images/album2.jpg",
+      "songs": [
+        "Prólogo",
+        "Mucho Gusto",
+        "Clima Tropical",
+        "Vida",
+        "Aceptas",
+        "Martillo y Ruedas",
+        "Hace Falta Soñar",
+        "Americanos",
+        "Interludio K219",
+        "Pensando En Ti",
+        "Y La Felicidad Que",
+        "No Justice",
+        "UneteNos",
+        "Quien Eres",
+        "Perdiendo La Fe",
+        "Ley De Hielo",
+        "Epílogo"
+      ]
+    },
+    {
+      "id": "querer-queremos",
+      "title": "Querer Queremos",
+      "image": "images/album3.jpg",
+      "songs": [
+        "Querer Queremos"
+      ]
+    },
+    {
+      "id": "guia-para-la-accion",
+      "title": "Guía para la Acción",
+      "image": "images/album4.jpg",
+      "songs": [
+        "Prólogo",
+        "ni de oro ni de goldfield",
+        "el mundo ya se acabo",
+        "cancion de la prision",
+        "can you hear it",
+        "guia para la accion",
+        "CANpesino",
+        "rialaif",
+        "perdon, asi mismo",
+        "corrazones de piedra",
+        "la voz",
+        "visiones",
+        "advertencia",
+        "Epílogo"
+      ]
+    }
+  ]
+}
+
+  

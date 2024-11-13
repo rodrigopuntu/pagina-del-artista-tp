@@ -1,0 +1,374 @@
+/* Variables de color */
+:root {
+  --background-color: #1b1b1b; /* Fondo oscuro */
+  --text-color: #ffffff; /* Texto blanco */
+  --button-background: #333333; /* Fondo oscuro para botones */
+  --button-text-color: #ffffff; /* Texto blanco en botones */
+  --highlight-color: #e60000; /* Rojo intenso, para resaltar */
+  --shadow-color: rgba(0, 0, 0, 0.8); /* Sombra más fuerte */
+}
+
+/* Modo oscuro automático basado en la preferencia del sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --button-background: #444444;
+    --button-text-color: #ffffff;
+    --highlight-color: #ff0000; /* Rojo más brillante en dark mode */
+  }
+}
+
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Encabezado */
+header {
+  padding: 20px;
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  width: 100%;
+  border-bottom: 2px solid var(--highlight-color); /* Línea roja en el encabezado */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+header p {
+  margin: 5px 0;
+  font-size: 1.2em;
+  text-transform: uppercase; /* Efecto agresivo */
+}
+
+/* Botón de carga */
+button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--highlight-color); /* Rojo al pasar el ratón */
+  transform: scale(1.05); /* Efecto de escala al hacer hover */
+}
+
+/* Sección de discografía */
+#discography-section, #lyrics-section {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--background-color);
+  box-shadow: 0 0 10px var(--shadow-color);
+}
+
+/* Letras de canciones */
+#lyrics {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #333333;
+  color: var(--text-color);
+  border-radius: 5px;
+  text-align: left;
+  white-space: pre-wrap;
+  font-family: 'Courier New', Courier, monospace; /* Estilo más crudo */
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+}
+
+/* Estilos de la card */
+.album-card {
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px var(--shadow-color);
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  width: 250px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-card:hover {
+  transform: scale(1.05); /* Aumenta el tamaño de la card */
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+/* Estilo para la imagen del álbum */
+.album-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.album-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--highlight-color); /* Rojo para resaltar el título */
+}
+
+/* Lista de canciones */
+.song-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.song-list li {
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: left;
+  width: 100%;
+}
+
+.song-list li:hover {
+  background-color: var(--highlight-color);
+}
+
+/* Estilos para organizar las cards */
+#discography {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 20px; /* Asegúrate de que las cards no estén recortadas */
+}
+
+/* Media Query para pantallas grandes */
+@media (min-width: 1024px) {
+  .album-card {
+    width: 250px;
+  }
+}
+
+/* Media Query para pantallas medianas (tablet) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .album-card {
+    width: 200px;
+  }
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 767px) {
+  .album-card {
+    width: 150px;
+  }
+}
+
+/* Estilo del contenedor del switch */
+#mode-switch-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+/* Estilo básico del switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Estilo del checkbox (oculto) */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Estilo del slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* El círculo dentro del switch */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+/* Cuando el switch está activado */
+input:checked + .slider {
+  background-color: #383838;
+}
+
+/* Mover el círculo cuando está activado */
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Estilos para el modo oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Estilo de las cards en modo oscuro */
+body.dark-mode .album-card {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Estilo del slider en modo oscuro */
+body.dark-mode .slider {
+  background-color: #555;
+}
+
+/* Estilo para la letra de la canción */
+#lyrics-section {
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--background-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#lyrics-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#lyrics-form input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#lyrics-form button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#lyrics-form button:hover {
+  background-color: var(--highlight-color);
+}
+/* Estilos generales */
+body, html {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Estilos para el header */
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #222;
+  color: #fff;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  margin-right: 20px;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Estilos para el contenido principal */
+main {
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Estilos para el modo de cambio */
+#mode-switch-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}

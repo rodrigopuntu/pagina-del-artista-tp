@@ -1,0 +1,46 @@
+<!-- album.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Álbum - Canserbero</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Álbum - Canserbero</h1>
+  </header>
+
+  <main>
+    <section id="albumDetails">
+      <!-- Aquí se mostrarán los detalles del álbum -->
+    </section>
+  </main>
+
+  <script>
+    // Obtener el id del álbum desde la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const albumId = urlParams.get("id");
+
+    // Buscar y mostrar los detalles del álbum según el id
+    fetch('discography.json')
+      .then(response => response.json())
+      .then(data => {
+        const album = data.albums.find(a => a.id === albumId);
+        if (album) {
+          const albumDetailsSection = document.getElementById("albumDetails");
+          albumDetailsSection.innerHTML = `
+            <h2>${album.title}</h2>
+            <img src="${album.image}" alt="Imagen del álbum ${album.title}" class="album-image">
+            <ul>
+              ${album.songs.map(song => `<li>${song}</li>`).join('')}
+            </ul>
+          `;
+        } else {
+          albumDetailsSection.innerHTML = "<p>Álbum no encontrado</p>";
+        }
+      });
+  </script>
+</body>
+</html>

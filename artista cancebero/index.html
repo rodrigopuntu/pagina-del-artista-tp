@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canción de Canserbero</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="images/logoclaro.jpg" alt="Logo de Canserbero" class="logo">
+      <div class="header-text">
+        <h1>Canserbero</h1>
+        <p>Discografía y letras</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Sección para cargar y mostrar la discografía -->
+    <section id="discography">
+      <h2>Discografía</h2>
+      <button id="loadDiscography">Cargar Discografía</button>
+      <div id="discography"></div> <!-- Aquí se mostrarán los álbumes -->
+    </section>
+
+    <!-- Sección para buscar letra de la canción -->
+    <section id="lyrics-section">
+      <h2>Buscar Letra de Canción</h2>
+      <form id="lyrics-form">
+        <input type="text" id="song-name" placeholder="Nombre de la canción" required>
+        <input type="text" id="artist-name" placeholder="Artista" value="Canserbero" required>
+        <button type="submit">Buscar Letra</button>
+      </form>
+      <div id="lyrics"></div> <!-- Aquí se mostrará la letra de la canción -->
+    </section>
+
+    <!-- Sección para mostrar las canciones del álbum -->
+    <section id="album-section">
+      <h2>Canciones del Álbum</h2>
+      <div id="song-List"></div> <!-- Aquí se listarán las canciones como botones -->
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+  <!-- Contenedor para el switch del modo oscuro -->
+  <div id="mode-switch-container">
+    <label class="switch">
+      <input type="checkbox" id="mode-toggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+</body>
+</html>
+
